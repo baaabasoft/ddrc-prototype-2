@@ -275,7 +275,7 @@ const APP = {
                 APP.navigateTo('staff-dashboard-view');
                 APP.renderStaffDashboard();
             } else {
-                alert("Invalid Staff Username. Try 'sarah.j' or 'rahul.k'");
+                alert("Invalid Staff Username. Try 'rajesh.kumar' or 'priya.staff'");
             }
         }
     },
