@@ -280,6 +280,24 @@ const APP = {
         }
     },
 
+    logout: () => {
+        // Reset data to initial state
+        DATA.resetState();
+
+        // Ensure all depts exist in queues after reset
+        DATA.departments.forEach(dept => {
+            if (!DATA.state.queues[dept.id]) DATA.state.queues[dept.id] = [];
+        });
+
+        // Clear current user
+        APP.currentUser = null;
+        APP.currentServingToken = null;
+        APP.currentStaffDeptId = null;
+
+        // Navigate to home
+        APP.navigateTo('home-view');
+    },
+
     /**
      * Admin Logic: Switch Tabs
      */
@@ -651,7 +669,7 @@ const APP = {
                 <td>${t.name}</td>
                 <td>${t.code}</td>
                 <td>₹${t.price}</td>
-                <td style="font-size: 0.85rem; color: #666;">${branchNames || '-'}</td>
+                <td>${t.estTime || '-'}</td>
                 <td>${dept ? dept.name : '<span style="color:red">Unassigned</span>'}</td>
                 <td>
                     <button class="btn btn-sm btn-secondary" onclick="APP.openTestEdit('${t.id}')">Edit</button>
@@ -663,13 +681,14 @@ const APP = {
 
     openTestEdit: (testId) => {
         const isEdit = !!testId;
-        const test = isEdit ? DATA.tests.find(t => t.id === testId) : { id: '', name: '', code: '', price: '', branchIds: [], deptId: '' };
+        const test = isEdit ? DATA.tests.find(t => t.id === testId) : { id: '', name: '', code: '', price: '', estTime: '', branchIds: [], deptId: '' };
 
         document.getElementById('edit-test-id').value = testId || '';
         document.getElementById('test-edit-title').textContent = isEdit ? 'Edit Test' : 'Create New Test';
         document.getElementById('edit-test-name').value = test.name;
         document.getElementById('edit-test-code').value = test.code;
         document.getElementById('edit-test-price').value = test.price;
+        document.getElementById('edit-test-time').value = test.estTime || '';
 
         // Populate Region Filter Dropdown
         const regionFilter = document.getElementById('test-region-filter');
@@ -767,9 +786,12 @@ const APP = {
                 </div>
                 
                 <div class="kanban-list" id="col-${dept.id}">
-                    ${(DATA.state.queues[dept.id] || []).map(token => {
-            const patient = DATA_CONTROLLER.getPatientByToken(token);
-            return `
+                    ${(DATA.state.queues[dept.id] || [])
+                .map(token => DATA_CONTROLLER.getPatientByToken(token))
+                .filter(patient => patient && patient.branch === branchId) // Filter by Branch
+                .map(patient => {
+                    const token = patient.token;
+                    return `
                         <div class="kanban-card" 
                              draggable="true" 
                              ondragstart="APP.drag(event, '${token}')" 
@@ -779,7 +801,7 @@ const APP = {
                             <p style="font-size: 0.8rem; margin-top: 5px;">Wait: 5m</p>
                         </div>
                         `;
-        }).join('')}
+                }).join('')}
                     ${(!DATA.state.queues[dept.id] || DATA.state.queues[dept.id].length === 0) ?
                 '<div style="text-align:center; padding:20px; color:#aaa; font-style:italic;">No Patients</div>' : ''}
                 </div>
@@ -909,6 +931,12 @@ const APP = {
             filteredPatients = filteredPatients.filter(p => p.branch === selectedBranch);
         }
 
+        const dateFilter = document.getElementById('customer-date-filter');
+        const selectedDate = dateFilter ? dateFilter.value : '';
+        if (selectedDate) {
+            filteredPatients = filteredPatients.filter(p => p.date === selectedDate);
+        }
+
         // Render table
         tbody.innerHTML = filteredPatients.map(p => {
             const branch = DATA.branches.find(b => b.id === p.branch);
@@ -917,6 +945,7 @@ const APP = {
                 <td>${p.name}</td>
                 <td>${p.mobile}</td>
                 <td>${branch ? branch.name : '-'}</td>
+                <td>${p.date || '-'}</td>
                 <td>
                     <button class="btn btn-sm btn-secondary" onclick="APP.showCustomerDetails('${p.token}')">View</button>
                 </td>
@@ -1145,6 +1174,7 @@ const APP = {
                     name: document.getElementById('edit-test-name').value,
                     code: document.getElementById('edit-test-code').value,
                     price: parseInt(document.getElementById('edit-test-price').value),
+                    estTime: document.getElementById('edit-test-time').value, // Added estTime
                     branchIds: checkedBranchIds,
                     deptId: document.getElementById('edit-test-dept').value
                 };
@@ -1152,7 +1182,7 @@ const APP = {
                 if (id) {
                     const test = DATA.tests.find(t => t.id === id);
                     if (test) Object.assign(test, formData);
-                    alert('Test mapping updated.');
+                    alert('Test updated successfully.');
                 } else {
                     DATA.tests.push({ id: 'tst-' + Date.now(), ...formData });
                     alert('New Test created successfully.');
@@ -1298,6 +1328,21 @@ const APP = {
         document.getElementById('staff-serving-token').textContent = token;
         document.getElementById('staff-serving-name').textContent = patient ? patient.name : 'Unknown';
         document.getElementById('staff-actions').classList.remove('hidden');
+
+        // Check if this is the patient's last test (only 1 test remaining)
+        const btnFinish = document.getElementById('btn-finish-all');
+        const btnAssign = document.getElementById('btn-assign-next');
+
+        if (patient && patient.tests && patient.tests.length <= 1) {
+            // Last test - show only Finish button
+            btnFinish.classList.remove('hidden');
+            btnAssign.classList.add('hidden');
+        } else {
+            // More tests remaining - show only Assign button
+            btnFinish.classList.add('hidden');
+            btnAssign.classList.remove('hidden');
+        }
+
         APP.renderStaffDashboard(); // Re-render to update active styling
     },
 
@@ -1310,6 +1355,32 @@ const APP = {
 
     callCustomer: () => {
         alert(`📢 Calling Token ${APP.currentServingToken} to Counter!`);
+    },
+
+    completeAllTests: () => {
+        const token = APP.currentServingToken;
+        if (!token) return;
+
+        const patient = DATA_CONTROLLER.getPatientByToken(token);
+        if (!patient) return;
+
+        const currentDeptId = APP.currentStaffDeptId;
+
+        // Remove from current queue
+        if (DATA.state.queues[currentDeptId]) {
+            DATA.state.queues[currentDeptId] = DATA.state.queues[currentDeptId].filter(t => t !== token);
+        }
+
+        // Mark patient as completed
+        patient.completed = true;
+        patient.status = 'completed';
+
+        alert(`✅ Patient ${token} (${patient.name}) has completed all tests and is marked as finished!`);
+
+        // Clear selection and refresh dashboard
+        APP.currentServingToken = null;
+        APP.clearStaffSelection();
+        APP.renderStaffDashboard();
     },
 
     openAssignModal: () => {

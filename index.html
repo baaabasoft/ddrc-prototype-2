@@ -266,7 +266,7 @@
                     <h1 id="staff-welcome">Welcome, Staff</h1>
                     <p id="staff-dept-label" style="color: var(--text-light);">Department View</p>
                 </div>
-                <button class="btn btn-secondary" onclick="APP.navigateTo('home-view')">Logout</button>
+                <button class="btn btn-secondary" onclick="APP.logout()">Logout</button>
             </div>
 
             <div class="staff-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
@@ -301,9 +301,14 @@
                             onclick="APP.callCustomer()">
                             📢 Call Customer
                         </button>
-                        <button class="btn btn-primary" style="width: 100%; padding: 15px;"
+                        <button id="btn-finish-all" class="btn btn-success hidden"
+                            style="width: 100%; margin-bottom: 15px; padding: 15px; background: #28a745; color: white;"
+                            onclick="APP.completeAllTests()">
+                            ✅ Finish - All Tests Complete
+                        </button>
+                        <button id="btn-assign-next" class="btn btn-primary" style="width: 100%; padding: 15px;"
                             onclick="APP.openAssignModal()">
-                            ✅ Complete & Assign
+                            ➡️ Complete & Assign to Next Dept
                         </button>
                     </div>
                 </div>
@@ -359,7 +364,7 @@
                             Branch</span>
                     </h1>
                 </div>
-                <button class="btn btn-secondary" onclick="APP.navigateTo('home-view')">Logout</button>
+                <button class="btn btn-secondary" onclick="APP.logout()">Logout</button>
             </div>
 
             <div class="admin-layout">
@@ -508,7 +513,7 @@
                                         <th>Test Name</th>
                                         <th>Code</th>
                                         <th>Price</th>
-                                        <th>Branches</th>
+                                        <th>Est. Time</th>
                                         <th>Department</th>
                                         <th>Actions</th>
                                     </tr>
@@ -578,6 +583,8 @@
                                     <option value="">All Branches</option>
                                     <!-- Populated by JS -->
                                 </select>
+                                <input type="date" id="customer-date-filter" class="form-control"
+                                    style="width: 150px; padding: 6px;" onchange="APP.filterCustomers()">
                             </div>
                         </div>
 
@@ -588,6 +595,7 @@
                                         <th>Name</th>
                                         <th>Mobile</th>
                                         <th>Branch</th>
+                                        <th>Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -775,9 +783,15 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Price (₹)</label>
-                        <input type="number" id="edit-test-price" class="form-control" required>
+                    <div class="flex-row">
+                        <div class="col-half form-group">
+                            <label class="form-label">Price (₹)</label>
+                            <input type="number" id="edit-test-price" class="form-control" required>
+                        </div>
+                        <div class="col-half form-group">
+                            <label class="form-label">est. Time (mins)</label>
+                            <input type="text" id="edit-test-time" class="form-control" placeholder="e.g. 15 mins">
+                        </div>
                     </div>
 
                     <div class="form-group">
