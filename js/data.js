@@ -136,29 +136,29 @@ const DATA = {
     initialState: {
         patients: [
             // Kochi Main (Central) - Mixed Dates
-            { id: 100, name: 'Albin', mobile: '9876543210', token: 'T-100', branch: 'br-kochi-main', tests: ['tst-xray-chest'], status: 'completed', completed: true, tags: ['Urgent'], date: '2023-10-26' },
-            { id: 102, name: 'Catherine', mobile: '9876543212', token: 'T-102', branch: 'br-kochi-main', tests: ['tst-cbc', 'tst-lft'], status: 'waiting', completed: false, tags: ['Elderly'], date: '2023-10-26' },
-            { id: 103, name: 'Varun', mobile: '9876543213', token: 'T-103', branch: 'br-kochi-main', tests: ['tst-fbs'], status: 'completed', completed: true, tags: ['Urgent', 'Elderly'], date: '2023-10-26' },
-            { id: 104, name: 'Elias', mobile: '9876543214', token: 'T-104', branch: 'br-kochi-main', tests: ['tst-xray-knee', 'tst-ecg'], status: 'waiting', completed: false, tags: [], date: '2023-10-26' },
-            { id: 105, name: 'Fathima', mobile: '9876543215', token: 'T-105', branch: 'br-kochi-main', tests: ['tst-usg-abd'], status: 'completed', completed: true, tags: [], date: '2023-10-26' },
-            { id: 106, name: 'Gopika', mobile: '9876543216', token: 'T-106', branch: 'br-kochi-main', tests: ['tst-cbc'], status: 'waiting', completed: false, tags: ['Urgent'], date: '2023-10-27' }, // Today
-            { id: 107, name: 'Harish', mobile: '9876543217', token: 'T-107', branch: 'br-kochi-main', tests: ['tst-lft', 'tst-rft', 'tst-tsh'], status: 'waiting', completed: false, tags: ['Elderly', 'Urgent'], date: '2023-10-27' }, // Today
-            { id: 108, name: 'Ibrahim', mobile: '9876543218', token: 'T-108', branch: 'br-kochi-main', tests: ['tst-tsh'], status: 'completed', completed: true, tags: [], date: '2023-10-27' }, // Today
-            { id: 109, name: 'Jay', mobile: '9876543219', token: 'T-109', branch: 'br-kochi-main', tests: ['tst-lipid'], status: 'waiting', completed: false, tags: ['Elderly'], date: '2023-10-25' }, // Past
-            { id: 110, name: 'Kavya', mobile: '9876543220', token: 'T-110', branch: 'br-kochi-main', tests: ['tst-rft', 'tst-cbc'], status: 'waiting', completed: false, tags: ['Urgent'], date: '2023-10-26' },
+            { id: 100, name: 'Albin', mobile: '9876543210', token: 'T-100', branch: 'br-kochi-main', tests: ['tst-xray-chest'], status: 'completed', completed: true, tags: ['Urgent'], date: '2026-01-01' },
+            { id: 102, name: 'Catherine', mobile: '9876543212', token: 'T-102', branch: 'br-kochi-main', tests: ['tst-cbc', 'tst-lft'], status: 'waiting', completed: false, tags: ['Elderly'], date: '2026-01-01' },
+            { id: 103, name: 'Varun', mobile: '9876543213', token: 'T-103', branch: 'br-kochi-main', tests: ['tst-fbs'], status: 'completed', completed: true, tags: ['Urgent', 'Elderly'], date: '2026-01-01' },
+            { id: 104, name: 'Elias', mobile: '9876543214', token: 'T-104', branch: 'br-kochi-main', tests: ['tst-xray-knee', 'tst-ecg'], status: 'waiting', completed: false, tags: [], date: '2026-01-01' },
+            { id: 105, name: 'Fathima', mobile: '9876543215', token: 'T-105', branch: 'br-kochi-main', tests: ['tst-usg-abd'], status: 'completed', completed: true, tags: [], date: '2026-01-01' },
+            { id: 106, name: 'Gopika', mobile: '9876543216', token: 'T-106', branch: 'br-kochi-main', tests: ['tst-cbc'], status: 'waiting', completed: false, tags: ['Urgent'], date: '2026-01-02' }, // Today
+            { id: 107, name: 'Harish', mobile: '9876543217', token: 'T-107', branch: 'br-kochi-main', tests: ['tst-lft', 'tst-rft', 'tst-tsh'], status: 'waiting', completed: false, tags: ['Elderly', 'Urgent'], date: '2026-01-02' }, // Today
+            { id: 108, name: 'Ibrahim', mobile: '9876543218', token: 'T-108', branch: 'br-kochi-main', tests: ['tst-tsh'], status: 'completed', completed: true, tags: [], date: '2026-01-02' }, // Today
+            { id: 109, name: 'Jay', mobile: '9876543219', token: 'T-109', branch: 'br-kochi-main', tests: ['tst-lipid'], status: 'waiting', completed: false, tags: ['Elderly'], date: '2025-12-31' }, // Past
+            { id: 110, name: 'Kavya', mobile: '9876543220', token: 'T-110', branch: 'br-kochi-main', tests: ['tst-rft', 'tst-cbc'], status: 'waiting', completed: false, tags: ['Urgent'], date: '2026-01-01' },
 
             // Aluva Hub (Central) - Today & Future
-            { id: 200, name: 'Binu', mobile: '9876543211', token: 'T-200', branch: 'br-aluva', tests: ['tst-ecg'], status: 'waiting', completed: false, tags: [], date: '2023-10-27' },
-            { id: 201, name: 'Lincy', mobile: '9876543221', token: 'T-201', branch: 'br-aluva', tests: ['tst-cbc'], status: 'waiting', completed: false, tags: ['Urgent'], date: '2023-10-27' },
-            { id: 202, name: 'Mahesh', mobile: '9876543222', token: 'T-202', branch: 'br-aluva', tests: ['tst-xray-chest'], status: 'completed', completed: true, tags: [], date: '2023-10-28' },
+            { id: 200, name: 'Binu', mobile: '9876543211', token: 'T-200', branch: 'br-aluva', tests: ['tst-ecg'], status: 'waiting', completed: false, tags: [], date: '2026-01-02' },
+            { id: 201, name: 'Lincy', mobile: '9876543221', token: 'T-201', branch: 'br-aluva', tests: ['tst-cbc'], status: 'waiting', completed: false, tags: ['Urgent'], date: '2026-01-02' },
+            { id: 202, name: 'Mahesh', mobile: '9876543222', token: 'T-202', branch: 'br-aluva', tests: ['tst-xray-chest'], status: 'completed', completed: true, tags: [], date: '2026-01-03' },
 
             // Calicut (North) - Today
-            { id: 300, name: 'Nikhil', mobile: '9876543223', token: 'T-300', branch: 'br-calicut', tests: ['tst-tsh', 'tst-fbs'], status: 'waiting', completed: false, tags: [], date: '2023-10-27' },
-            { id: 301, name: 'Omana', mobile: '9876543224', token: 'T-301', branch: 'br-calicut', tests: ['tst-lipid'], status: 'waiting', completed: false, tags: ['Elderly'], date: '2023-10-27' },
+            { id: 300, name: 'Nikhil', mobile: '9876543223', token: 'T-300', branch: 'br-calicut', tests: ['tst-tsh', 'tst-fbs'], status: 'waiting', completed: false, tags: [], date: '2026-01-02' },
+            { id: 301, name: 'Omana', mobile: '9876543224', token: 'T-301', branch: 'br-calicut', tests: ['tst-lipid'], status: 'waiting', completed: false, tags: ['Elderly'], date: '2026-01-02' },
 
             // Trivandrum (South) - Past
-            { id: 400, name: 'Paul', mobile: '9876543225', token: 'T-400', branch: 'br-trivandrum', tests: ['tst-rft'], status: 'waiting', completed: false, tags: [], date: '2023-10-26' },
-            { id: 401, name: 'Queen', mobile: '9876543226', token: 'T-401', branch: 'br-trivandrum', tests: ['tst-cbc'], status: 'completed', completed: true, tags: ['Urgent'], date: '2023-10-26' }
+            { id: 400, name: 'Paul', mobile: '9876543225', token: 'T-400', branch: 'br-trivandrum', tests: ['tst-rft'], status: 'waiting', completed: false, tags: [], date: '2026-01-01' },
+            { id: 401, name: 'Queen', mobile: '9876543226', token: 'T-401', branch: 'br-trivandrum', tests: ['tst-cbc'], status: 'completed', completed: true, tags: ['Urgent'], date: '2026-01-01' }
         ],
         queues: {
             'dept-phlebotomy': ['T-102', 'T-106', 'T-107', 'T-109', 'T-110', 'T-201', 'T-300', 'T-301', 'T-400'], // Mixed branches
