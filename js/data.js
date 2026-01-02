@@ -76,9 +76,9 @@ const DATA = {
 
     // User Management Data
     users: [
-        { id: 'usr-001', name: 'Dr. Rajesh Kumar', username: 'rajesh.kumar', role: 'Staff - Phlebotomy', roleId: 'role-staff', regionId: 'reg-central', branchIds: ['br-kochi-main'], branch: 'Kochi Main Branch', status: 'Active' },
-        { id: 'usr-002', name: 'Nurse Priya', username: 'priya.staff', role: 'Staff - Radiology', roleId: 'role-staff', regionId: 'reg-central', branchIds: ['br-aluva'], branch: 'Aluva Hub', status: 'Active' },
-        { id: 'usr-003', name: 'Tech Arun', username: 'arun.tech', role: 'Staff - Cardiology', roleId: 'role-technician', regionId: 'reg-north', branchIds: ['br-calicut'], branch: 'Calicut Branch', status: 'Inactive' }
+        { id: 'usr-001', name: 'Rajesh Kumar', username: 'rajesh.kumar', role: 'Staff - Phlebotomy', roleId: 'role-staff', regionId: 'reg-central', branchIds: ['br-kochi-main'], branch: 'Kochi Main Branch', status: 'Active' },
+        { id: 'usr-002', name: 'Priya Menon', username: 'priya.staff', role: 'Staff - Radiology', roleId: 'role-staff', regionId: 'reg-central', branchIds: ['br-aluva'], branch: 'Aluva Hub', status: 'Active' },
+        { id: 'usr-003', name: 'Arun Nair', username: 'arun.tech', role: 'Staff - Cardiology', roleId: 'role-technician', regionId: 'reg-north', branchIds: ['br-calicut'], branch: 'Calicut Branch', status: 'Inactive' }
     ],
 
     // User Roles
@@ -133,26 +133,26 @@ const DATA = {
     // Initial State with Mock Data
     state: {
         patients: [
-            { id: 100, name: 'Albin', mobile: '9876543210', token: 'T-100', branch: 'br-kochi-main', tests: ['tst-xray-chest'], status: 'waiting', completed: false, tags: ['Urgent'] },
-            { id: 101, name: 'Binu', mobile: '9876543211', token: 'T-101', branch: 'br-aluva', tests: ['tst-ecg'], status: 'waiting', completed: false, tags: [] },
+            { id: 100, name: 'Albin', mobile: '9876543210', token: 'T-100', branch: 'br-kochi-main', tests: ['tst-xray-chest'], status: 'waiting', completed: true, tags: ['Urgent'] },
+            { id: 101, name: 'Binu', mobile: '9876543211', token: 'T-101', branch: 'br-aluva', tests: ['tst-ecg'], status: 'waiting', completed: true, tags: [] },
             { id: 102, name: 'Catherine', mobile: '9876543212', token: 'T-102', branch: 'br-kakkanad', tests: ['tst-cbc'], status: 'waiting', completed: false, tags: ['Elderly'] },
-            { id: 103, name: 'Varun', mobile: '9876543213', token: 'T-103', branch: 'br-trivandrum', tests: ['tst-fbs'], status: 'waiting', completed: false, tags: ['Urgent', 'Elderly'] },
+            { id: 103, name: 'Varun', mobile: '9876543213', token: 'T-103', branch: 'br-trivandrum', tests: ['tst-fbs'], status: 'waiting', completed: true, tags: ['Urgent', 'Elderly'] },
             { id: 104, name: 'Elias', mobile: '9876543214', token: 'T-104', branch: 'br-calicut', tests: ['tst-xray-knee'], status: 'waiting', completed: false, tags: [] },
-            { id: 105, name: 'Fathima', mobile: '9876543215', token: 'T-105', branch: 'br-kannur', tests: ['tst-usg-abd'], status: 'waiting', completed: false, tags: [] },
+            { id: 105, name: 'Fathima', mobile: '9876543215', token: 'T-105', branch: 'br-kannur', tests: ['tst-usg-abd'], status: 'waiting', completed: true, tags: [] },
             { id: 106, name: 'Gopika', mobile: '9876543216', token: 'T-106', branch: 'br-kasaragod', tests: ['tst-cbc'], status: 'waiting', completed: false, tags: ['Urgent'] },
             { id: 107, name: 'Harish', mobile: '9876543217', token: 'T-107', branch: 'br-kollam', tests: ['tst-lft'], status: 'waiting', completed: false, tags: ['Elderly', 'Urgent'] },
-            { id: 108, name: 'Ibrahim', mobile: '9876543218', token: 'T-108', branch: 'br-alappuzha', tests: ['tst-tsh'], status: 'waiting', completed: false, tags: [] },
+            { id: 108, name: 'Ibrahim', mobile: '9876543218', token: 'T-108', branch: 'br-alappuzha', tests: ['tst-tsh'], status: 'waiting', completed: true, tags: [] },
             { id: 109, name: 'Jay', mobile: '9876543219', token: 'T-109', branch: 'br-kochi-main', tests: ['tst-lipid'], status: 'waiting', completed: false, tags: ['Elderly'] },
             { id: 110, name: 'Kavya', mobile: '9876543220', token: 'T-110', branch: 'br-aluva', tests: ['tst-rft'], status: 'waiting', completed: false, tags: ['Urgent'] }
         ],
         queues: {
-            'dept-phlebotomy': ['T-102', 'T-106', 'T-107', 'T-108', 'T-109', 'T-110'],
-            'dept-radiology': ['T-100', 'T-104', 'T-105'],
-            'dept-cardiology': ['T-101'],
-            'dept-biochemistry': ['T-103'],
+            'dept-phlebotomy': ['T-102', 'T-106', 'T-107', 'T-109', 'T-110'],
+            'dept-radiology': ['T-104'],
+            'dept-cardiology': [],
+            'dept-biochemistry': [],
             'dept-neurology': []
         },
-        tokenCounter: 106,
+        tokenCounter: 111,
     }
 };
 
